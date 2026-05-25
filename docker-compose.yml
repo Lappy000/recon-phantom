@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  recon-phantom:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    environment:
+      - DATABASE_URL=sqlite+aiosqlite:///./data/recon.db
+      - LOG_LEVEL=INFO
+    restart: unless-stopped
