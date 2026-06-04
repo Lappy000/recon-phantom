@@ -27,13 +27,18 @@ async def init_database(url: str | None = None) -> None:
     if url is None:
         url = get_settings().database_url
 
-    _engine = create_async_engine(
-        url,
-        echo=get_settings().debug,
-        pool_pre_ping=True,
-        pool_size=5,
-        max_overflow=10,
-    )
+    # SQLite (aiosqlite) uses StaticPool, which does not accept the
+    # pool_size / max_overflow arguments. Only pass connection-pool
+    # tuning for server-based databases (PostgreSQL, MySQL, etc.).
+    engine_kwargs: dict = {
+        "echo": get_settings().debug,
+        "pool_pre_ping": True,
+    }
+    if not url.startswith("sqlite"):
+        engine_kwargs["pool_size"] = 5
+        engine_kwargs["max_overflow"] = 10
+
+    _engine = create_async_engine(url, **engine_kwargs)
 
     _session_factory = async_sessionmaker(
         _engine,
