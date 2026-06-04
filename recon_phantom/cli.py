@@ -7,30 +7,22 @@ generating reports, and monitoring scan status.
 from __future__ import annotations
 
 import asyncio
-import sys
 from pathlib import Path
 from typing import Optional
-from uuid import UUID
 
 import typer
 from rich import print as rprint
-from rich.columns import Columns
 from rich.console import Console
-from rich.live import Live
 from rich.panel import Panel
 from rich.progress import (
     BarColumn,
-    MofNCompleteColumn,
     Progress,
     SpinnerColumn,
     TaskProgressColumn,
     TextColumn,
     TimeElapsedColumn,
-    TimeRemainingColumn,
 )
 from rich.table import Table
-from rich.text import Text
-from rich.tree import Tree
 
 from recon_phantom import __version__
 
@@ -397,7 +389,7 @@ def serve(
     scan monitoring and control.
     """
     _print_banner()
-    console.print(f"[bold green]🌐 Starting API server[/bold green]")
+    console.print("[bold green]🌐 Starting API server[/bold green]")
     console.print(f"   Host: [cyan]{host}[/cyan]")
     console.print(f"   Port: [cyan]{port}[/cyan]")
     console.print(f"   Docs: [link]http://{host}:{port}/docs[/link]")
@@ -532,7 +524,7 @@ def status(
 async def _fetch_scans(scan_id: Optional[str] = None) -> list[dict]:
     """Fetch scan records from database."""
     from recon_phantom.core.database import init_database, get_session
-    from recon_phantom.core.models import Scan, Target
+    from recon_phantom.core.models import Scan
     from sqlalchemy import select
     from sqlalchemy.orm import selectinload
 
@@ -585,7 +577,7 @@ def list_modules() -> None:
         table.add_row(icon, name, desc)
 
     console.print(table)
-    console.print(f"\n[dim]Use --modules flag to select specific modules: recon-phantom scan target.com -m port_scanner,subdomain[/dim]")
+    console.print("\n[dim]Use --modules flag to select specific modules: recon-phantom scan target.com -m port_scanner,subdomain[/dim]")
 
 
 @app.callback(invoke_without_command=True)

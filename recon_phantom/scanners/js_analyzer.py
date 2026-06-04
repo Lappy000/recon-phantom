@@ -10,7 +10,6 @@ import re
 from typing import Any, Optional
 from urllib.parse import urljoin, urlparse
 
-import httpx
 
 from recon_phantom.scanners.base import BaseScanner
 
@@ -195,7 +194,7 @@ class JSAnalyzer(BaseScanner):
         internal_urls = sum(1 for r in results if "Internal URL" in r.get("title", ""))
 
         results.append(self.build_result(
-            title=f"JavaScript Analysis Summary",
+            title="JavaScript Analysis Summary",
             description=(
                 f"Analyzed {len(js_urls_limited)} JavaScript files. "
                 f"Found: {secrets_found} potential secrets, "

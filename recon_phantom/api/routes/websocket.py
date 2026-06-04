@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import asyncio
-from typing import Optional
 from uuid import UUID
 
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 
-from recon_phantom.core.events import EventBus, ScanEvent, get_event_bus
+from recon_phantom.core.events import ScanEvent, get_event_bus
 
 router = APIRouter()
 

@@ -6,7 +6,6 @@ import asyncio
 import logging
 from datetime import datetime, timedelta
 from typing import Optional
-from uuid import UUID
 
 from recon_phantom.core.engine import ScanEngine
 

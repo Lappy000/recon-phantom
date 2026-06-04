@@ -91,16 +91,16 @@ TOP_PORTS: list[int] = [
 # Service fingerprint patterns (regex patterns matched against banners)
 SERVICE_PATTERNS: dict[str, list[tuple[str, str]]] = {
     "ssh": [
-        (r"SSH-[\d.]+-(.+)", "SSH"),
         (r"OpenSSH[_\s]+([\d.]+)", "OpenSSH"),
         (r"dropbear", "Dropbear SSH"),
+        (r"SSH-[\d.]+-(.+)", "SSH"),
     ],
     "http": [
-        (r"HTTP/[\d.]+\s+\d+", "HTTP"),
         (r"Apache/([\d.]+)", "Apache"),
         (r"nginx/([\d.]+)", "nginx"),
         (r"Microsoft-IIS/([\d.]+)", "IIS"),
         (r"lighttpd/([\d.]+)", "lighttpd"),
+        (r"HTTP/[\d.]+\s+\d+", "HTTP"),
     ],
     "ftp": [
         (r"220.*FTP", "FTP"),

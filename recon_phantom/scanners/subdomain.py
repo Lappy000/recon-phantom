@@ -6,7 +6,6 @@ Validates discovered subdomains via DNS resolution.
 """
 
 import asyncio
-import itertools
 import re
 from typing import Any, Optional
 

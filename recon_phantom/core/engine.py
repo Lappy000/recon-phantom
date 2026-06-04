@@ -11,7 +11,7 @@ import asyncio
 import time
 import traceback
 from datetime import datetime
-from typing import Any, Optional, Type
+from typing import Any, Type
 from uuid import UUID, uuid4
 
 import orjson

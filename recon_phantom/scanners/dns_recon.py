@@ -6,8 +6,6 @@ and reverse DNS lookups.
 """
 
 import asyncio
-import ipaddress
-import re
 from typing import Any, Optional
 
 import dns.asyncresolver

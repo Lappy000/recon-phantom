@@ -4,7 +4,6 @@ Checks for the presence and correctness of HTTP security headers,
 grades each header's configuration, and detects common misconfigurations.
 """
 
-import asyncio
 from typing import Any, Optional
 
 import httpx

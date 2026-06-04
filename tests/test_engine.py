@@ -4,11 +4,9 @@ from __future__ import annotations
 
 import asyncio
 from typing import Any
-from unittest.mock import AsyncMock, patch
 from uuid import UUID
 
 import pytest
-import pytest_asyncio
 
 from recon_phantom.config import Settings
 from recon_phantom.core.engine import ScanEngine, ScanTask
