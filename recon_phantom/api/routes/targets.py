@@ -108,7 +108,7 @@ async def get_target(target_id: str) -> TargetResponse:
         )
 
 
-@router.delete("/{target_id}", status_code=204)
+@router.delete("/{target_id}", status_code=204, response_model=None)
 async def delete_target(target_id: str) -> None:
     """Delete a target and all associated scans."""
     async with get_session() as session:

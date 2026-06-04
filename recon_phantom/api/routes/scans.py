@@ -151,7 +151,7 @@ async def get_scan(scan_id: str) -> ScanResponse:
         )
 
 
-@router.delete("/{scan_id}", status_code=204)
+@router.delete("/{scan_id}", status_code=204, response_model=None)
 async def cancel_scan(request: Request, scan_id: str) -> None:
     """Cancel a running or queued scan."""
     engine = request.app.state.engine

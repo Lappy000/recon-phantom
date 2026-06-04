@@ -13,7 +13,7 @@ from recon_phantom.core.models import Scan, ScanResult
 router = APIRouter()
 
 
-@router.get("/{scan_id}")
+@router.get("/{scan_id}", response_model=None)
 async def generate_report(
     scan_id: str,
     format: str = Query("json", description="Report format: json, html"),
