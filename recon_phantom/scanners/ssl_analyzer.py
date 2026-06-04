@@ -12,7 +12,6 @@ import socket
 from typing import Any, Optional
 
 from cryptography import x509
-from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa, ec, dsa
 from cryptography.x509.oid import ExtensionOID, NameOID
 
@@ -169,7 +168,7 @@ class SSLAnalyzerScanner(BaseScanner):
                 context.maximum_version = max_version
 
                 with socket.create_connection((host, port), timeout=5) as sock:
-                    with context.wrap_socket(sock, server_hostname=host) as ssock:
+                    with context.wrap_socket(sock, server_hostname=host):
                         return True
             except (ssl.SSLError, socket.error, OSError):
                 return False
