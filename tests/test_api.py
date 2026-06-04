@@ -24,8 +24,20 @@ async def app():
     await init_database(test_settings.database_url)
 
     application = create_app()
+
+    # ASGITransport does not run the lifespan context, so wire up the
+    # scan engine and event bus manually (mirroring app.lifespan).
+    from recon_phantom.core.engine import ScanEngine
+    from recon_phantom.core.events import get_event_bus
+
+    engine = ScanEngine(settings=test_settings)
+    application.state.engine = engine
+    application.state.event_bus = get_event_bus()
+    await engine.start(num_workers=1)
+
     yield application
 
+    await engine.stop()
     await close_database()
 
 
